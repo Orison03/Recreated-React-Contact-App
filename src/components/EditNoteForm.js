@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
 import { EditUser } from "../actions/userActions";
 
-function EditUserForm({ userData, deleteUser, handleEdit, hide }) {
+function EditNoteForm ({ userData, deleteUser, handleEdit, hide }) {
   const dispatch = useDispatch();
 
   const [name, setName] = useState(userData.name);
@@ -63,4 +63,4 @@ function EditUserForm({ userData, deleteUser, handleEdit, hide }) {
   );
 }
 
-export default EditUserForm;
+export default EditNoteForm;

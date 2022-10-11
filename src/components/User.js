@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import EditUserForm from "./EditUserForm";
+import EditUserForm from "./EditNoteForm";
 import { useDispatch } from "react-redux";
 import { DeleteUser } from "../actions/userActions";
 
