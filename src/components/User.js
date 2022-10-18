@@ -3,14 +3,19 @@ import { Modal } from "react-bootstrap";
 import EditUserForm from "./EditNoteForm";
 import { useDispatch } from "react-redux";
 import { DeleteUser } from "../actions/userActions";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { db } from "../Firebase/configer";
 
 function User({ userData, deleteUser, handleEdit }) {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const handleDelete = () => {
-    dispatch(DeleteUser(userData.id));
+  const handleDelete = async(e) => {
+    e.preventDefault()
+          await deleteDoc(doc(db, "allContact", userData.id));
+
+    // dispatch(DeleteUser(userData.id));
   };
   return (
     <>
@@ -20,7 +25,7 @@ function User({ userData, deleteUser, handleEdit }) {
         </Modal.Header>
         <Modal.Body>
           <EditUserForm
-            handleEdit={handleEdit}
+            handleEdit={handleEdit} 
             hide={handleClose}
             userData={userData}
           />

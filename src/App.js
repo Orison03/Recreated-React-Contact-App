@@ -11,7 +11,7 @@ import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    const readdata = async () => {
+    const readdata = async() => {
       const q = query(collection(db, "allContact"));
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const cities = [];

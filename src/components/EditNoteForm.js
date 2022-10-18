@@ -3,6 +3,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
 import { EditUser } from "../actions/userActions";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { db } from "../Firebase/configer";
 
 function EditNoteForm ({ userData, deleteUser, handleEdit, hide }) {
   const dispatch = useDispatch();
@@ -10,8 +12,16 @@ function EditNoteForm ({ userData, deleteUser, handleEdit, hide }) {
   const [name, setName] = useState(userData.name);
   const [phoneNumber, setPhoneNumber] = useState(userData.phoneNumber);
   const [location, setLocation] = useState(userData.location);
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    let userInfo = { id: userData.id, name, phoneNumber, location };
+        try {
+        const userRef = doc(db, "allContact", userData.id);
+        await updateDoc(userRef, userInfo);
+        } catch (error) {
+        console.log(error);
+        }
+
     dispatch(EditUser({ id: userData.id, name, phoneNumber, location }));
     setName("");
     setPhoneNumber("");
